@@ -70,7 +70,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    cursor: pointer;
   }
 
 
@@ -95,8 +94,8 @@
   .content {
     padding-top: 0.3rem;
     padding-bottom: 0.75rem; 
-    font-size: 0.86rem;
+    font-size: 0.875rem;
     line-height: 1.25rem;
-    font-weight: 400; 
+    font-weight: 300; 
   }
 </style>
