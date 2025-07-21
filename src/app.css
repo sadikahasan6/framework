@@ -1,0 +1,8 @@
+:root{
+    /* colors */
+    --primary: rgb(15, 15, 15);
+    --primary-hover: rgb(64, 64, 64);
+    
+    --destructive: rgb(216, 49, 49);
+    --destructive-hover: rgb(241, 73, 73);
+}
