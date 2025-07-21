@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap');
 :root{
     /* colors */
     --primary: rgb(15, 15, 15);
@@ -5,4 +6,9 @@
     
     --destructive: rgb(216, 49, 49);
     --destructive-hover: rgb(241, 73, 73);
+}
+
+body{
+    font-family: "Geist", sans-serif;
+    /* font-family: Arial, Helvetica, sans-serif; */
 }

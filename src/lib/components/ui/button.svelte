@@ -57,7 +57,7 @@
     background-color: var(--destructive-hover);
   }
   .outline {
-    border: 1px solid #cccaca;
+    border: 1px solid #ccc;
     box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
   }
   .outline:hover {
@@ -71,13 +71,13 @@
     text-underline-offset: 4px;
   }
   .btn:disabled {
-    filter: grayscale(0.4);
-    opacity: 50%;
+    filter: grayscale(0.2);
+    opacity: 80%;
   }
   .loader {
     width: 1rem;
     height: 1rem;
-    border: 0.11rem solid #FFF;
+    border: 0.11rem solid currentColor;
     border-bottom-color: transparent;
     border-radius: 50%;
     display: inline-block;
