@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Accordion from '$lib/components/ui/accordion.svelte';
 	import Alert from '$lib/components/ui/alert.svelte';
+	import Breadcrumb from '$lib/components/ui/breadcrumb.svelte';
 	import Button from '$lib/components/ui/button.svelte';
 	import Calendar from '$lib/components/ui/calender.svelte';
 
@@ -19,6 +20,18 @@
 	function handleDateSelect(newDate: Date) {
 		date = newDate;
 	}
+
+	  const crumbs = [
+    { title: "Home", href: "/" },
+    {
+      title: "Library",
+      children: [
+        { title: "Articles", href: "/library/articles" },
+        { title: "Videos", href: "/library/videos" },
+      ],
+    },
+    { title: "Current Page" },
+  ];
 </script>
 
 <main>
@@ -57,6 +70,9 @@
 			<Alert title="Hey there!" message="This is a default alert." />
 		</div>
 	</div>
+	<div class="example">
+		 <Breadcrumb items={crumbs} />
+	</div>
 </main>
 
 <style>
@@ -67,6 +83,7 @@
 	}
 	.example {
 		display: flex;
+		min-height: 100px;
 		align-items: center;
 		background-color: white;
 		justify-content: center;
