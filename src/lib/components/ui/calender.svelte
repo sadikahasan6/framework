@@ -1,22 +1,36 @@
 <script lang="ts">
-  import { createEventDispatcher, onMount } from "svelte";
+  import { onMount } from 'svelte';
 
-  const dispatch = createEventDispatcher<{
-    select: Date;
-  }>();
+  let selectedDate: Date | null = $state(null);
+  let currentDate: Date = $state(new Date());
+  let days: (number | null)[] = $state([]);
+  let showMonthPicker = $state(false);
+  let showYearPicker = $state(false);
+  
 
-  export let selectedDate: Date | null = null;
-  let currentDate: Date = new Date();
-  let days: (number | null)[] = [];
-  let showMonthPicker = false;
-  let showYearPicker = false;
+  // Make onSelect optional with a default empty function
+  let { onSelect = () => {} }: { onSelect?: (date: Date) => void } = $props();
 
   const monthNames = [
-    "January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December"
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December'
   ];
 
-  const dayNames = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
+  const dayNames = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
+
+  // Use $derived for reactive computed values
+  const currentMonth = $derived(monthNames[currentDate.getMonth()]);
+  const currentYear = $derived(currentDate.getFullYear());
 
   function getDaysInMonth(year: number, month: number): (number | null)[] {
     const date = new Date(year, month, 1);
@@ -29,13 +43,11 @@
     return result;
   }
 
-  // Renamed and modified to navigate months
   function prevMonth() {
     currentDate = new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1);
     updateCalendar();
   }
 
-  // Renamed and modified to navigate months
   function nextMonth() {
     currentDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1);
     updateCalendar();
@@ -48,7 +60,7 @@
   function selectDate(day: number) {
     const date = new Date(currentDate.getFullYear(), currentDate.getMonth(), day);
     selectedDate = date;
-    dispatch('select', date);
+    onSelect(date);
   }
 
   function isToday(day: number): boolean {
@@ -61,10 +73,12 @@
   }
 
   function isSelected(day: number): boolean {
-    return selectedDate !== null &&
+    return (
+      selectedDate !== null &&
       selectedDate.getDate() === day &&
       selectedDate.getMonth() === currentDate.getMonth() &&
-      selectedDate.getFullYear() === currentDate.getFullYear();
+      selectedDate.getFullYear() === currentDate.getFullYear()
+    );
   }
 
   function toggleMonthPicker() {
@@ -97,7 +111,7 @@
     return years;
   }
 
-  let yearPickerCenter = currentDate.getFullYear();
+  let yearPickerCenter = $state(currentDate.getFullYear());
 
   function shiftYearRange(offset: number) {
     yearPickerCenter += offset;
@@ -108,65 +122,36 @@
 
 <div class="calendar-container">
   <div class="calendar-header">
-    <button
-      on:click={prevMonth}
-      class="calendar-nav-button"
-      aria-label="Previous month"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-      >
-        <path
-          fill="none"
-          stroke="currentColor"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="1.5"
-          d="m18 16l-6-6l6-6"
-        />
+    <button onclick={prevMonth} class="calendar-nav-button" aria-label="Previous month">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path fill="none" stroke="currentColor" d="m15 6l-6 6l6 6"></path>
       </svg>
     </button>
 
     <h2 class="calendar-title">
-      <span
+      <button
+        type="button"
         class="calendar-month-display"
-        on:click={toggleMonthPicker}
+        onclick={toggleMonthPicker}
         tabindex="0"
-        role="button"
         aria-label="Select month"
       >
-        {monthNames[currentDate.getMonth()]}
-      </span>
-      <span
+        {currentMonth}
+      </button>
+      <button
+        type="button"
         class="calendar-year-display"
-        on:click={toggleYearPicker}
+        onclick={toggleYearPicker}
         tabindex="0"
-        role="button"
         aria-label="Select year"
       >
-        {currentDate.getFullYear()}
-      </span>
+        {currentYear}
+      </button>
     </h2>
 
-    <button
-      on:click={nextMonth}
-      class="calendar-nav-button"
-      aria-label="Next month"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-
-        viewBox="0 0 24 24"
-      >
-        <path
-          fill="none"
-          stroke="currentColor"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="1.5"
-          d="m6 16l6-6l-6-6"
-        />
+    <button onclick={nextMonth} class="calendar-nav-button" aria-label="Next month">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path fill="none" stroke="currentColor" d="m9 6l6 6l-6 6"></path>
       </svg>
     </button>
   </div>
@@ -179,7 +164,8 @@
             type="button"
             class="month-picker-item"
             class:selected-month={currentDate.getMonth() === index}
-            on:click={() => selectMonth(index)}
+            onclick={() => selectMonth(index)}
+            aria-label={`Select ${month}`}
           >
             {month.slice(0, 3)}
           </button>
@@ -189,12 +175,50 @@
   {:else if showYearPicker}
     <div class="year-picker">
       <div class="year-picker-header">
-        <button on:click={() => shiftYearRange(-10)} class="year-picker-nav">
-          &lt;&lt;
+        <button 
+          type="button"
+          onclick={() => shiftYearRange(-10)} 
+          class="year-picker-nav"
+          aria-label="Previous decade"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5"
+              d="m12 6l-6 6l6 6m6-12l-6 6l6 6"
+            />
+          </svg>
         </button>
         <span>{yearPickerCenter - 5} - {yearPickerCenter + 6}</span>
-        <button on:click={() => shiftYearRange(10)} class="year-picker-nav">
-          &gt;&gt;
+        <button 
+          type="button"
+          onclick={() => shiftYearRange(10)} 
+          class="year-picker-nav"
+          aria-label="Next decade"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5"
+              d="m12 18l6-6l-6-6M6 18l6-6l-6-6"
+            />
+          </svg>
         </button>
       </div>
       <div class="year-picker-grid">
@@ -203,7 +227,8 @@
             type="button"
             class="year-picker-item"
             class:selected-year={currentDate.getFullYear() === year}
-            on:click={() => selectYear(year)}
+            onclick={() => selectYear(year)}
+            aria-label={`Select year ${year}`}
           >
             {year}
           </button>
@@ -227,7 +252,7 @@
             class="calendar-day-button"
             class:is-today={isToday(day)}
             class:is-selected={isSelected(day)}
-            on:click={() => selectDate(day)}
+            onclick={() => selectDate(day)}
             aria-pressed={isSelected(day)}
             aria-label={`Select ${monthNames[currentDate.getMonth()]} ${day}, ${currentDate.getFullYear()}`}
           >
@@ -240,9 +265,8 @@
 </div>
 
 <style>
-  /* Main container styles */
   .calendar-container {
-    width: 15rem;
+    width: 250px;
     border-radius: 0.5rem;
     border: 1px solid #d1d5db;
     padding: 1rem;
@@ -250,7 +274,6 @@
     background-color: #fff;
   }
 
-  /* Header styles */
   .calendar-header {
     display: flex;
     justify-content: space-between;
@@ -259,31 +282,31 @@
   }
 
   .calendar-nav-button {
-  display: inline-flex; /* Use inline-flex instead of flex for better inline behavior */
-  align-items: center;
-  justify-content: center;
-  width: 1.9rem;
-  aspect-ratio: 1/1;
-  padding: 0; /* Remove any default padding */
-  margin: 0; /* Remove any default margin */
-  border-radius: 0.5rem;
-  transition: background-color 200ms cubic-bezier(0.4, 0, 0.2, 1);
-  background: none;
-  border: none;
-  cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    aspect-ratio: 1/1;
+    padding: 0px;
+    margin: 0;
+    border-radius: 0.5rem;
+    transition: background-color 200ms cubic-bezier(0.4, 0, 0.2, 1);
+    background: none;
+    border: none;
+    cursor: pointer;
   }
-    .calendar-nav-button svg {
-      display: block; /* Remove any extra space around SVG */
-  width: 1.25rem; /* Set explicit size */
-  height: 1.25rem; /* Set explicit size */
-  margin: auto; /* Additional centering */
+  
+  .calendar-nav-button svg {
+    display: block;
+    width: 1.6rem;
+    height: 1.6rem;
+    margin: auto;
+    padding: 0;
   }
 
   .calendar-nav-button:hover {
     background-color: #e5e7eb;
   }
-
-
 
   .calendar-title {
     font-size: 1.1rem;
@@ -300,6 +323,11 @@
     border-radius: 0.25rem;
     transition: background-color 150ms ease-in-out;
     user-select: none;
+    background: none;
+    border: none;
+    font: inherit;
+    color: inherit;
+    font-weight: 600;
   }
 
   .calendar-month-display:hover,
@@ -307,7 +335,6 @@
     background-color: #f0f0f0;
   }
 
-  /* Day names header */
   .calendar-day-names {
     display: grid;
     grid-template-columns: repeat(7, minmax(0, 1fr));
@@ -321,14 +348,12 @@
     font-weight: 500;
   }
 
-  /* Days grid */
   .calendar-days-grid {
     display: grid;
     grid-template-columns: repeat(7, minmax(0, 1fr));
     gap: 0.4rem;
   }
 
-  /* Individual day button */
   .calendar-day-button {
     width: 100%;
     aspect-ratio: 1 / 1;
@@ -350,20 +375,17 @@
     border: 1px solid #d1d5db;
   }
 
-  /* Specific styles for "today" */
   .calendar-day-button.is-today {
     background-color: #e0f2fe;
     color: #2563eb;
     font-weight: 500;
   }
 
-  /* Specific styles for "selected" date */
   .calendar-day-button.is-selected {
-    background-color: #374151;
+    background-color: var(--primary);
     color: #fff;
   }
 
-  /* Month picker styles */
   .month-picker {
     margin: 0.5rem 0;
   }
@@ -389,11 +411,10 @@
   }
 
   .month-picker-item.selected-month {
-    background-color: #374151;
+    background-color: var(--primary);
     color: #fff;
   }
 
-  /* Year picker styles */
   .year-picker {
     margin: 0.5rem 0;
     max-height: 200px;
@@ -442,7 +463,7 @@
   }
 
   .year-picker-item.selected-year {
-    background-color: #374151;
+    background-color: var(--primary);
     color: #fff;
   }
 </style>
