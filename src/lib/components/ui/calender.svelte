@@ -111,7 +111,7 @@
     return years;
   }
 
-  let yearPickerCenter = $state(currentDate.getFullYear());
+  let yearPickerCenter: number = $derived(currentDate.getFullYear());
 
   function shiftYearRange(offset: number) {
     yearPickerCenter += offset;

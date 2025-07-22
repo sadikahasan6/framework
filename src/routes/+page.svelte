@@ -21,30 +21,64 @@
 	}
 </script>
 
-<h1>Welcome to SvelteKit</h1>
-<p>
-	Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation
-</p>
-<Button type="button" size="md" variant="default">Button</Button>
+<main>
+	<div class="example flex-col">
+		<h1>Welcome to SvelteKit</h1>
+		<p>
+			Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation
+		</p>
+	</div>
+	<div class="example">
+		<Button type="button" size="md" variant="default">Medium size</Button>
+		<Button type="button" size="lg" variant="default">Large size</Button>
+		<Button type="button" size="sm" variant="default">Small size</Button>
+		<Button type="button" size="md" variant="destructive">Small size</Button>
+		<Button type="button" size="md" variant="link">Small size</Button>
+		<Button type="button" size="md" variant="outline">Small size</Button>
+		<Button type="button" size="md" variant="ghost">Small size</Button>
+		<Button type="button" size="md" variant="default" isLoading>Loading</Button>
+		<Button type="button" size="md" variant="default" disabled>Disabled</Button>
+	</div>
 
-<div style="padding: 15px;">
-	<Accordion items={faq} />
-</div>
+	<div class="example">
+		<Accordion items={faq} />
+	</div>
 
-<Calendar onSelect={handleDateSelect} />
-Selected date: {date ? date.toDateString() : "None"}
+	<div class="example flex-col">
+		<Calendar onSelect={handleDateSelect} />
+		Selected date: {date ? date.toDateString() : 'None'}
+	</div>
 
-<div class="" style="width: 350px;">
-  <Alert
-      title="Success"
-      variant="success"
-      message="This is a success alert!"
-    />
-    <Alert variant="error" title="Error" message="This is an error alert!" />
-    <Alert
-      title="Warning"
-      variant="warning"
-      message="This is a warning alert!"
-    />
-    <Alert title="Hey there!" message="This is a default alert." />
-</div>
+	<div class="example flex-col">
+		<div class="w-30">
+			<Alert title="Success" variant="success" message="This is a success alert!" />
+			<Alert variant="error" title="Error" message="This is an error alert!" />
+			<Alert title="Warning" variant="warning" message="This is a warning alert!" />
+			<Alert title="Hey there!" message="This is a default alert." />
+		</div>
+	</div>
+</main>
+
+<style>
+	.flex-col {
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+	}
+	.example {
+		display: flex;
+		align-items: center;
+		background-color: white;
+		justify-content: center;
+		gap: 20px;
+		padding: 20px;
+		/* background-color: #f9f9f9; */
+		border-radius: 8px;
+		border: 1px solid #e0e0e0;
+		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+		margin: 30px;
+	}
+	.w-30 {
+		width: 30rem;
+	}
+</style>
