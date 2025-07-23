@@ -195,7 +195,7 @@
                 >
               {/if}
               </span>
-              <span style="flex-grow: 1; padding-left: 0.3rem; display: flex; align-items: center;">{option}</span>
+              <span style="flex-grow: 1; padding-left: 0.35rem; display: flex; align-items: center;">{option}</span>
             </button>
           </li>
         {/each}
@@ -272,7 +272,7 @@
   border: none;
   width: 100%;
   overflow-x: hidden;
-  padding: 0.5rem 2.5rem 0.5rem 2rem;
+  padding: 0.7rem 2.5rem 0.7rem 2.2rem;
   border-bottom: 1px solid #e5e7eb;
   outline: none;
   border-radius: 0.375rem 0.375rem 0 0;
