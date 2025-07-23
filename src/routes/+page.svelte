@@ -4,6 +4,7 @@
 	import Breadcrumb from '$lib/components/ui/breadcrumb.svelte';
 	import Button from '$lib/components/ui/button.svelte';
 	import Calendar from '$lib/components/ui/calender.svelte';
+	import Combobox from '$lib/components/ui/combobox.svelte';
 
 	const faq = [
 		{ title: 'What is Auronno POS?', content: 'A POS system for businesses.' },
@@ -32,6 +33,7 @@
     },
     { title: "Current Page" },
   ];
+  let selectedFruit: string | null = null;
 </script>
 
 <main>
@@ -72,6 +74,15 @@
 	</div>
 	<div class="example">
 		 <Breadcrumb items={crumbs} />
+	</div>
+
+	<div class="example">
+		      <Combobox
+        options={["Apple", "Banana", "Cherry", "Durian"]}
+        placeholder="Pick a fruit..."
+        value={selectedFruit}
+        searchPlaceholder="Search fruit..."
+      />
 	</div>
 </main>
 
