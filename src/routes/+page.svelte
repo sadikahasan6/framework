@@ -8,6 +8,7 @@
   import Combobox from "$lib/components/ui/combobox.svelte";
   import ContextMenu from "$lib/components/ui/context-menu.svelte";
 	import DatePicker from "$lib/components/ui/date-picker.svelte";
+	import Input from "$lib/components/ui/input.svelte";
 
   const faq = [
     { title: "What is Auronno POS?", content: "A POS system for businesses." },
@@ -274,6 +275,9 @@
   </div>
   <div class="example">
 	<DatePicker />
+  </div>
+  <div class="example">
+    <Input placeholder="email" />
   </div>
 </main>
 

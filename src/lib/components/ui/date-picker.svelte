@@ -154,7 +154,7 @@
   width: 100%;
   z-index: 20;
   background: #fff;
-  border-radius: 0.375rem;
+  border-radius: var(--border-radius);
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 

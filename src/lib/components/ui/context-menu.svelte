@@ -66,7 +66,7 @@
 	.context-menu {
 		position: fixed;
 		z-index: 50;
-		border-radius: 0.375rem;
+		border-radius: var(--border-radius);
 		border: 1px solid #e5e7eb;
 		background-color: white;
 		box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);

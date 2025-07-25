@@ -25,7 +25,7 @@
   .modal-container {
     background-color: white;
     padding: 1.5rem;
-    border-radius: 0.5rem;
+    border-radius: var(--border-radius);
     width: 30rem;
     max-width: 100%;
   }
@@ -54,7 +54,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    border-radius: 0.375rem;
+    border-radius: var(--border-radius);
     font-size: 0.9rem;
     transition: all 0.15s ease-in-out;
     outline: none;

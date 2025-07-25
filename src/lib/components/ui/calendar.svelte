@@ -285,7 +285,7 @@ const dispatcher = createEventDispatcher<{ select: Date }>();
 <style>
   .calendar-container {
     width: 222px;
-    border-radius: 0.5rem;
+    border-radius: var(--border-radius);
     border: 1px solid #d1d5db;
     padding: 0.5rem 1rem;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.08);
@@ -338,7 +338,7 @@ const dispatcher = createEventDispatcher<{ select: Date }>();
   .calendar-year-display {
     cursor: pointer;
     padding: 0 0.2em;
-    border-radius: 0.25rem;
+    border-radius: var(--border-radius);
     transition: background-color 150ms ease-in-out;
     user-select: none;
     background: none;
@@ -416,7 +416,7 @@ const dispatcher = createEventDispatcher<{ select: Date }>();
 
   .month-picker-item {
     padding: 0.5rem;
-    border-radius: 0.25rem;
+    border-radius: var(--border-radius);
     text-align: center;
     cursor: pointer;
     border: none;
@@ -468,7 +468,7 @@ const dispatcher = createEventDispatcher<{ select: Date }>();
 
   .year-picker-item {
     padding: 0.5rem;
-    border-radius: 0.25rem;
+    border-radius: var(--border-radius);
     text-align: center;
     cursor: pointer;
     border: none;

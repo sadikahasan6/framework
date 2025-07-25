@@ -163,7 +163,7 @@
 		min-width: 160px;
 		background: #fff;
 		border: 1px solid #e0e0e0;
-		border-radius: 0.3em;
+		border-radius: var(--border-radius);
 		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 		z-index: 10;
 		padding: 0.3em 0.3em;
@@ -174,7 +174,7 @@
 		padding: 0.5em 1em;
 		color: #333;
 		text-decoration: none;
-		border-radius: 0.2em;
+		border-radius: var(--border-radius);
 		font-size: 0.95em;
 		transition: background 0.15s;
 	}

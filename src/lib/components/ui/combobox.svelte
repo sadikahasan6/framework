@@ -218,7 +218,7 @@
   width: 100%;
   padding: 0.5rem 0.75rem;
   border: 1px solid #d1d5db;
-  border-radius: 0.375rem;
+  border-radius: var(--border-radius);
   background: #fff;
   text-align: left;
   display: flex;
@@ -250,7 +250,7 @@
   width: 100%;
   background: #fff;
   border: 1px solid #d1d5db;
-  border-radius: 0.375rem;
+  border-radius: var(--border-radius);
   box-shadow: 0 4px 24px 0 rgba(0,0,0,0.08);
   box-sizing: border-box;
 }
@@ -275,7 +275,7 @@
   padding: 0.7rem 2.5rem 0.7rem 2.2rem;
   border-bottom: 1px solid #e5e7eb;
   outline: none;
-  border-radius: 0.375rem 0.375rem 0 0;
+  border-radius: var(--border-radius) var(--border-radius) 0 0;
   font-size: 1rem;
 }
 .combo-search::placeholder {
@@ -313,7 +313,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-radius: 0.25rem;
+  border-radius: var(--border-radius);
   font-size: 0.9rem;
   color: #111827;
   transition: background 0.15s;

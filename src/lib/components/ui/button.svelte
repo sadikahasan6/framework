@@ -25,7 +25,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    border-radius: 0.375rem;
+    border-radius: var(--border-radius);
     font-size: 0.875rem;
     transition: all 0.15s ease-in-out;
     outline: none;
@@ -34,7 +34,7 @@
     background-color: white;
   }
   .sm {
-    height: 25px;
+    height: 30px;
   }
   .md {
     height: 35px;

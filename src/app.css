@@ -6,6 +6,9 @@
     
     --destructive: rgb(216, 49, 49);
     --destructive-hover: rgb(241, 73, 73);
+
+    /* borders */
+    --border-radius: 0.775rem; /* 6px */
 }
 
 body{

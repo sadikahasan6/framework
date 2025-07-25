@@ -8,7 +8,7 @@
   .alert-container {
     padding: 0.5rem 1rem;
     margin-bottom: 1rem;
-    border-radius: 0.5rem;
+    border-radius: var(--border-radius);
     border: 1px solid #e5e7eb;
     display: flex;
     align-items: center;
