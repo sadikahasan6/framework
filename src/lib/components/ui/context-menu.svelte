@@ -90,6 +90,7 @@
 
 	.context-menu-button {
 		display: flex;
+		border-radius: var(--border-radius);
 		width: 100%;
 		align-items: center;
 		gap: 0.5rem;

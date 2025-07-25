@@ -385,7 +385,7 @@ const dispatcher = createEventDispatcher<{ select: Date }>();
     justify-content: center;
     align-items: center;
     font-size: 0.95rem;
-    color: #1f2937;
+    color: var(--primary);
   }
 
   .calendar-day-button:hover {

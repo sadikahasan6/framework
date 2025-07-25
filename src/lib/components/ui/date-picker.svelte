@@ -119,7 +119,7 @@
   width: 100%;
   padding: 0.5rem 0.75rem;
   border: 1px solid #d1d5db;
-  border-radius: 0.375rem;
+  border-radius: var(--border-radius);
   background: #fff;
   text-align: left;
   display: flex;
