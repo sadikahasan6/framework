@@ -1,16 +1,18 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-
-  let selectedDate: Date | null = $state(null);
+import { createEventDispatcher } from 'svelte';
+const dispatcher = createEventDispatcher<{ select: Date }>();
+    let { 
+    selectedDate = null,
+    onSelect = () => {}
+  } = $props();
   let currentDate: Date = $state(new Date());
   let days: (number | null)[] = $state([]);
   let showMonthPicker = $state(false);
   let showYearPicker = $state(false);
   
 
-  // Make onSelect optional with a default empty function
-  let { onSelect = () => {} }: { onSelect?: (date: Date) => void } = $props();
-
+  // Month and day names for display
   const monthNames = [
     'January',
     'February',
@@ -61,6 +63,7 @@
     const date = new Date(currentDate.getFullYear(), currentDate.getMonth(), day);
     selectedDate = date;
     onSelect(date);
+    dispatcher('select', date);
   }
 
   function isToday(day: number): boolean {
@@ -157,7 +160,13 @@
   </div>
 
   {#if showMonthPicker}
-    <div class="month-picker">
+    <div
+      class="month-picker"
+      onclick={e => e.stopPropagation()}
+      onkeydown={(e) => { if (e.key === 'Enter' || e.key === ' ') e.stopPropagation(); }}
+      role="presentation"
+      aria-label="Month picker"
+    >
       <div class="month-picker-grid">
         {#each monthNames as month, index}
           <button
@@ -173,7 +182,16 @@
       </div>
     </div>
   {:else if showYearPicker}
-    <div class="year-picker">
+    <div
+      class="year-picker"
+      role="presentation"
+      onclick={e => e.stopPropagation()}
+      onkeydown={(e) => {
+        // Allow Escape and Tab to bubble, but stop propagation for Enter/Space
+        if (e.key === 'Enter' || e.key === ' ') e.stopPropagation();
+      }}
+      aria-label="Year picker"
+    >
       <div class="year-picker-header">
         <button 
           type="button"
@@ -266,10 +284,10 @@
 
 <style>
   .calendar-container {
-    width: 250px;
+    width: 222px;
     border-radius: 0.5rem;
     border: 1px solid #d1d5db;
-    padding: 1rem;
+    padding: 0.5rem 1rem;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.08);
     background-color: #fff;
   }

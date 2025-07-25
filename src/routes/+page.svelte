@@ -4,9 +4,10 @@
   import Alert from "$lib/components/ui/alert.svelte";
   import Breadcrumb from "$lib/components/ui/breadcrumb.svelte";
   import Button from "$lib/components/ui/button.svelte";
-  import Calendar from "$lib/components/ui/calender.svelte";
+  import Calendar from "$lib/components/ui/calendar.svelte";
   import Combobox from "$lib/components/ui/combobox.svelte";
   import ContextMenu from "$lib/components/ui/context-menu.svelte";
+	import DatePicker from "$lib/components/ui/date-picker.svelte";
 
   const faq = [
     { title: "What is Auronno POS?", content: "A POS system for businesses." },
@@ -270,6 +271,9 @@
 	bind:visible={contextMenuVisible}
 	close={handleCloseContextMenu}
 />
+  </div>
+  <div class="example">
+	<DatePicker />
   </div>
 </main>
 
