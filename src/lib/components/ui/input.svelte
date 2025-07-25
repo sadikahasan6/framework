@@ -34,10 +34,14 @@
 }
 .input-base:focus-visible {
   border-color: var(--input-focus, #acacac);
+  background-color: none;
   box-shadow: 0 0 0 3px #acacac86;
 }
 .input-base[aria-invalid="true"] {
   border-color: var(--input-error, #e53e3e);
+  /* box-shadow: 0 0 0 3px rgba(229,62,62,0.2); */
+}
+.input-base[aria-invalid="true"]:focus-visible {
   box-shadow: 0 0 0 3px rgba(229,62,62,0.2);
 }
 .input-base::placeholder {
@@ -49,11 +53,18 @@
 }
 .input-file {
   background: transparent;
-  font-size: 0.95rem;
   font-weight: 500;
-  padding-top: 0.375rem;
-  padding-bottom: 0.375rem;
+  display: flex;
+  align-items: center;
 }
+.input-file::file-selector-button {
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin-right: 1rem;
+  height: 100%;
+}
+
 </style>
 
 {#if type === "file"}

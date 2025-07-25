@@ -33,6 +33,12 @@
     padding: 0 15px;
     background-color: white;
   }
+
+  .btn:hover {
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
+    opacity: 0.8;
+    cursor: pointer;
+  }
   .sm {
     height: 30px;
   }
@@ -46,16 +52,11 @@
     background-color: var(--primary);
     color: white;
   }
-  .default:hover {
-    background-color: var(--primary-hover);
-  }
   .destructive {
     background-color: var(--destructive);
     color: white;
   }
-  .destructive:hover {
-    background-color: var(--destructive-hover);
-  }
+
   .outline {
     border: 1px solid #ccc;
     box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
@@ -63,8 +64,9 @@
   .outline:hover {
     background-color: #eeeded;
   }
-  .ghost:hover {
-    background-color: #eeeded;
+  .ghost {
+    background-color: transparent;
+    /* color: var(--primary); */
   }
   .link:hover {
     text-decoration: underline;
@@ -72,7 +74,8 @@
   }
   .btn:disabled {
     filter: grayscale(0.2);
-    opacity: 80%;
+    opacity: 0.5;
+    cursor: not-allowed;
   }
   .loader {
     width: 1rem;
