@@ -14,6 +14,8 @@
 	import Slider from '$lib/components/ui/slider.svelte';
 	import Tooltip from '$lib/components/ui/tooltip.svelte';
 	import { Toaster, toast } from '$lib/components/ui/sonner/index';
+	import Switch from '$lib/components/ui/switch.svelte';
+	import * as Table from '$lib/components/ui/table/index.js';
 	let value = $state([25, 75]);
 	let value2 = $state([25, 75]);
 	let value3 = $state([10]);
@@ -200,7 +202,50 @@
 	function handleCloseContextMenu() {
 		contextMenuVisible = false;
 	}
-	let showToast = $state(false);
+	const invoices = [
+		{
+			invoice: 'INV001',
+			paymentStatus: 'Paid',
+			totalAmount: '$250.00',
+			paymentMethod: 'Credit Card'
+		},
+		{
+			invoice: 'INV002',
+			paymentStatus: 'Pending',
+			totalAmount: '$150.00',
+			paymentMethod: 'PayPal'
+		},
+		{
+			invoice: 'INV003',
+			paymentStatus: 'Unpaid',
+			totalAmount: '$350.00',
+			paymentMethod: 'Bank Transfer'
+		},
+		{
+			invoice: 'INV004',
+			paymentStatus: 'Paid',
+			totalAmount: '$450.00',
+			paymentMethod: 'Credit Card'
+		},
+		{
+			invoice: 'INV005',
+			paymentStatus: 'Paid',
+			totalAmount: '$550.00',
+			paymentMethod: 'PayPal'
+		},
+		{
+			invoice: 'INV006',
+			paymentStatus: 'Pending',
+			totalAmount: '$200.00',
+			paymentMethod: 'Bank Transfer'
+		},
+		{
+			invoice: 'INV007',
+			paymentStatus: 'Unpaid',
+			totalAmount: '$300.00',
+			paymentMethod: 'Credit Card'
+		}
+	];
 </script>
 
 <main>
@@ -308,23 +353,23 @@
 	</div>
 	<div class="example">
 		<Tooltip text="This is a simple tooltip">
-			<button class="btn">Hover me (top)</button>
+			<Button variant="outline">Hover me (top)</Button>
 		</Tooltip>
 
 		<Tooltip text="Bottom positioned tooltip" position="bottom">
-			<button class="btn">Bottom tooltip</button>
+			<Button variant="outline">Bottom tooltip</Button>
 		</Tooltip>
 
 		<Tooltip text="Left positioned tooltip" position="left">
-			<button class="btn">Left tooltip</button>
+			<Button variant="outline">Left tooltip</Button>
 		</Tooltip>
 
 		<Tooltip text="Right positioned tooltip" position="right">
-			<button class="btn">Right tooltip</button>
+			<Button variant="outline">Right tooltip</Button>
 		</Tooltip>
 	</div>
 	<div class="example">
-		<Button
+		<Button variant="outline"
 			on:click={() =>
 				toast.success('Event has been created', {
 					description: 'Sunday, December 03, 2023 at 9:00 AM',
@@ -336,7 +381,43 @@
 		>
 			Give me a toast
 		</Button>
-		<Toaster closeButton position="top-center"/>
+		<Toaster closeButton position="top-center" />
+	</div>
+	<div class="example">
+		<Switch id="airplane-mode" />
+		<Label forId="airplane-mode">Airplane Mode</Label>
+	</div>
+
+	<div class="example">
+		<div class="" style="width: 40rem;">
+			<Table.Root>
+				<Table.Caption>A list of your recent invoices.</Table.Caption>
+				<Table.Header>
+					<Table.Row>
+						<Table.Head style="width: 100px;">Invoice</Table.Head>
+						<Table.Head>Status</Table.Head>
+						<Table.Head>Method</Table.Head>
+						<Table.Head style="text-align: right;">Amount</Table.Head>
+					</Table.Row>
+				</Table.Header>
+				<Table.Body>
+					{#each invoices as invoice (invoice)}
+						<Table.Row>
+							<Table.Cell style="font-weight: 500;">{invoice.invoice}</Table.Cell>
+							<Table.Cell>{invoice.paymentStatus}</Table.Cell>
+							<Table.Cell>{invoice.paymentMethod}</Table.Cell>
+							<Table.Cell style="text-align: right;">{invoice.totalAmount}</Table.Cell>
+						</Table.Row>
+					{/each}
+				</Table.Body>
+				<Table.Footer>
+					<Table.Row>
+						<Table.Cell colspan={3}>Total</Table.Cell>
+						<Table.Cell style="text-align: right;">$2,500.00</Table.Cell>
+					</Table.Row>
+				</Table.Footer>
+			</Table.Root>
+		</div>
 	</div>
 </main>
 
@@ -361,6 +442,7 @@
 		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 		margin: 30px;
 	}
+
 	.w-30 {
 		width: 30rem;
 	}

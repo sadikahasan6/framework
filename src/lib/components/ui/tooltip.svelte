@@ -82,7 +82,7 @@
     z-index: 1000;
     padding: 8px 12px;
     border-radius: 6px;
-    font-size: 14px;
+    font-size: 12px;
     line-height: 1.4;
     white-space: nowrap;
     max-width: 300px;

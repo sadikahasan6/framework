@@ -18,3 +18,8 @@ body{
     margin: 0;
     box-sizing: border-box;
 }
+
+::selection {
+  background-color: var(--primary); /* yellow selection */
+  color: white;              /* optional: change selected text color */
+}
