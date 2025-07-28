@@ -11,6 +11,13 @@
 	import DatePicker from '$lib/components/ui/date-picker.svelte';
 	import Input from '$lib/components/ui/input.svelte';
 	import Label from '$lib/components/ui/label.svelte';
+	import Slider from '$lib/components/ui/slider.svelte';
+	import Tooltip from '$lib/components/ui/tooltip.svelte';
+	import { Toaster, toast } from '$lib/components/ui/sonner/index';
+	let value = $state([25, 75]);
+	let value2 = $state([25, 75]);
+	let value3 = $state([10]);
+	let singleValue = $state([25]);
 
 	const faq = [
 		{ title: 'What is Auronno POS?', content: 'A POS system for businesses.' },
@@ -21,7 +28,8 @@
 		}
 	];
 
-	let date: Date | null = null;
+	// let date: Date | null = null;
+	let date: Date | null = $state(null);
 
 	// Function to handle date selection from Calendar component
 	function handleDateSelect(newDate: Date) {
@@ -41,7 +49,7 @@
 	];
 	let selectedFruit: string | null = null;
 
-	let openModal = false;
+	let openModal = $state(false);
 
 	const handleConfirm = () => {
 		console.log('Confirmed!');
@@ -54,9 +62,9 @@
 	};
 
 	let selectedItem = '';
-	let contextMenuVisible = false;
-	let contextMenuX = 0;
-	let contextMenuY = 0;
+	let contextMenuVisible = $state(false);
+	let contextMenuX = $state(0);
+	let contextMenuY = $state(0);
 
 	// Define the menu item type to match the component
 	type MenuItem =
@@ -177,7 +185,7 @@
 		}
 	];
 
-	let currentMenuItems: MenuItem[] = menuItems;
+	let currentMenuItems: MenuItem[] = $state(menuItems);
 
 	function handleContextMenu(event: MouseEvent, items: MenuItem[]) {
 		event.preventDefault();
@@ -192,6 +200,7 @@
 	function handleCloseContextMenu() {
 		contextMenuVisible = false;
 	}
+	let showToast = $state(false);
 </script>
 
 <main>
@@ -260,7 +269,7 @@
 		role="button"
 		tabindex="0"
 	>
-	Right click to open context menu
+		Right click to open context menu
 		<ContextMenu
 			items={currentMenuItems}
 			x={contextMenuX}
@@ -285,6 +294,50 @@
 		<Checkbox id="terms" />
 		<Label forId="terms">Accept terms and conditions</Label>
 	</div>
+	<div class="example">
+		<div class="w-30">
+			<div style="display: flex; gap: 20px;">
+				<Slider type="multiple" orientation="vertical" bind:value max={100} step={1} />
+				<Slider type="single" orientation="vertical" bind:value={singleValue} max={100} step={1} />
+				<div class="w-30 flex-col">
+					<Slider type="multiple" orientation="horizontal" bind:value={value3} max={100} step={1} />
+					<Slider type="single" orientation="horizontal" bind:value={value2} max={100} step={1} />
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="example">
+		<Tooltip text="This is a simple tooltip">
+			<button class="btn">Hover me (top)</button>
+		</Tooltip>
+
+		<Tooltip text="Bottom positioned tooltip" position="bottom">
+			<button class="btn">Bottom tooltip</button>
+		</Tooltip>
+
+		<Tooltip text="Left positioned tooltip" position="left">
+			<button class="btn">Left tooltip</button>
+		</Tooltip>
+
+		<Tooltip text="Right positioned tooltip" position="right">
+			<button class="btn">Right tooltip</button>
+		</Tooltip>
+	</div>
+	<div class="example">
+		<Button
+			on:click={() =>
+				toast.success('Event has been created', {
+					description: 'Sunday, December 03, 2023 at 9:00 AM',
+					action: {
+						label: 'Undo',
+						onClick: () => console.info('Undo')
+					}
+				})}
+		>
+			Give me a toast
+		</Button>
+		<Toaster closeButton position="top-center"/>
+	</div>
 </main>
 
 <style>
@@ -295,7 +348,7 @@
 	}
 	.example {
 		display: flex;
-		min-height: 100px;
+		min-height: 50px;
 		align-items: center;
 		background-color: white;
 		justify-content: center;
