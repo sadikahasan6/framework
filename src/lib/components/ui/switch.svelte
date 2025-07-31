@@ -104,5 +104,5 @@
     class="switch-thumb"
     data-slot="switch-thumb"
     data-state={checked ? "checked" : "unchecked"}
-  />
+  ></span>
 </button>

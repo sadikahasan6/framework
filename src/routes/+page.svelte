@@ -16,6 +16,8 @@
 	import { Toaster, toast } from '$lib/components/ui/sonner/index';
 	import Switch from '$lib/components/ui/switch.svelte';
 	import * as Table from '$lib/components/ui/table/index.js';
+	import { Tabs } from '$lib/components/ui/tabs/index.js';
+	import Skeleton from '$lib/components/ui/skeleton.svelte';
 	let value = $state([25, 75]);
 	let value2 = $state([25, 75]);
 	let value3 = $state([10]);
@@ -369,7 +371,8 @@
 		</Tooltip>
 	</div>
 	<div class="example">
-		<Button variant="outline"
+		<Button
+			variant="outline"
 			on:click={() =>
 				toast.success('Event has been created', {
 					description: 'Sunday, December 03, 2023 at 9:00 AM',
@@ -417,6 +420,27 @@
 					</Table.Row>
 				</Table.Footer>
 			</Table.Root>
+		</div>
+	</div>
+	<div class="example">
+		<div class="w-30">
+			<Tabs.Root value="account" class="w-[400px]">
+				<Tabs.List>
+					<Tabs.Trigger value="account">Account</Tabs.Trigger>
+					<Tabs.Trigger value="password">Password</Tabs.Trigger>
+				</Tabs.List>
+				<Tabs.Content value="account">Make changes to your account here.</Tabs.Content>
+				<Tabs.Content value="password">Change your password here.</Tabs.Content>
+			</Tabs.Root>
+		</div>
+	</div>
+	<div class="example">
+		<div class="flex-col">
+			<Skeleton style="height: 50px; width: 50px; border-radius: 99999px;" />
+		</div>
+		<div class="flex-col" style="gap:7px">
+			<Skeleton style="height: 16px; width: 300px; border-radius: 15px;"/>
+		<Skeleton style="height: 16px; width: 250px; border-radius: 15px;"/>
 		</div>
 	</div>
 </main>
