@@ -18,6 +18,7 @@
 	import * as Table from '$lib/components/ui/table/index.js';
 	import { Tabs } from '$lib/components/ui/tabs/index.js';
 	import Skeleton from '$lib/components/ui/skeleton.svelte';
+	import Avatar from '$lib/components/ui/avatar.svelte';
 	let value = $state([25, 75]);
 	let value2 = $state([25, 75]);
 	let value3 = $state([10]);
@@ -439,9 +440,13 @@
 			<Skeleton style="height: 50px; width: 50px; border-radius: 99999px;" />
 		</div>
 		<div class="flex-col" style="gap:7px">
-			<Skeleton style="height: 16px; width: 300px; border-radius: 15px;"/>
-		<Skeleton style="height: 16px; width: 250px; border-radius: 15px;"/>
+			<Skeleton style="height: 16px; width: 300px; border-radius: 15px;" />
+			<Skeleton style="height: 16px; width: 250px; border-radius: 15px;" />
 		</div>
+	</div>
+	<div class="example">
+		<Avatar src="https://static.vecteezy.com/system/resources/thumbnails/000/439/863/small/Basic_Ui__28186_29.jpg" alt="User Dvatar" className="custom-class" />
+		<Avatar src="" alt="User Dvatar" className="custom-class" />
 	</div>
 </main>
 
