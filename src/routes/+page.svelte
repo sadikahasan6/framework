@@ -19,6 +19,7 @@
 	import { Tabs } from '$lib/components/ui/tabs/index.js';
 	import Skeleton from '$lib/components/ui/skeleton.svelte';
 	import Avatar from '$lib/components/ui/avatar.svelte';
+	import Div from '$lib/styles/div.svelte';
 	let value = $state([25, 75]);
 	let value2 = $state([25, 75]);
 	let value3 = $state([10]);
@@ -447,6 +448,11 @@
 	<div class="example">
 		<Avatar src="https://static.vecteezy.com/system/resources/thumbnails/000/439/863/small/Basic_Ui__28186_29.jpg" alt="User Dvatar" className="custom-class" />
 		<Avatar src="" alt="User Dvatar" className="custom-class" />
+	</div>
+	<div class="example">
+		<div class="p-10" style="background-color: #f0f0f0; border-radius: 8px;">
+			<p>This div has a padding of 2.</p>
+		</div>
 	</div>
 </main>
 
